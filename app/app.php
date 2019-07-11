@@ -27,6 +27,7 @@ require_once "../app/err_reporting.php";
 /**
  * 5. Connections aux base de données
  */
+require_once "../app/dbconnect.php";
 
 /**
  * 6. Routage de l'application
