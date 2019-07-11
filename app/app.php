@@ -32,6 +32,7 @@ require_once "../app/dbconnect.php";
 /**
  * 6. Routage de l'application
  */
+require_once "../app/routing.php";
 
 /**
  * 7. Inclusion des fonctions "Utils"
