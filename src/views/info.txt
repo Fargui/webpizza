@@ -1,0 +1,1 @@
+Le répertoire "views" stocke les fichiers HTML qui permettent l'affichage des informations.

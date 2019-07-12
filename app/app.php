@@ -46,3 +46,4 @@ include_once "../app/utils.php";
 /**
  * 9. Compilation de la page (part 2 - la compilation finale)
  */
+include_once "../app/compile.php";

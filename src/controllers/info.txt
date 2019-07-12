@@ -1,0 +1,1 @@
+Le répertoire "controllers" stocke les fontions déclenchées par les routes.

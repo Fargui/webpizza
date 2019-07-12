@@ -22,6 +22,10 @@ $routes = [
 
     // Liste des produits
     ["pizzas", "/pizzas", "products:pizzas", ["HEAD","GET"]],
+    // ["pizzas", "/pizzas", ""],
+
+
+
     ["salads", "/salades", "products:salads", ["HEAD","GET"]],
     ["desserts", "/desserts", "products:desserts", ["HEAD","GET"]],
     ["drinks", "/boissons", "products:drinks", ["HEAD","GET"]],
