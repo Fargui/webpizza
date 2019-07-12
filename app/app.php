@@ -42,6 +42,7 @@ include_once "../app/utils.php";
 /**
  * 8. Controleur principal (commun à toutes les pages du site)
  */
+include_once "../src/controllers/common.php";
 
 /**
  * 9. Compilation de la page
