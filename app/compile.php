@@ -40,7 +40,6 @@ $controller_file = $controller[0];
 $controller_path = "../src/controllers/".$controller_file.".php";
 
 // -- Définition de la fonction à exécuter
-// $controller_methode = join("_", $controller);
 $controller_methode = isset($controller[1]) ? $controller[1] : null;
 
 if ($controller_methode !== null && !empty($controller_methode)) 

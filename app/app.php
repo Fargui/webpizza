@@ -40,10 +40,10 @@ require_once "../app/routing.php";
 include_once "../app/utils.php";
 
 /**
- * 8. Compilation de la page (part 1 - Le controleur principal)
+ * 8. Controleur principal (commun à toutes les pages du site)
  */
 
 /**
- * 9. Compilation de la page (part 2 - la compilation finale)
+ * 9. Compilation de la page
  */
 include_once "../app/compile.php";
