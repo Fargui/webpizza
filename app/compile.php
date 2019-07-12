@@ -35,14 +35,21 @@ $controller_methode = null;     // homepage_index
 $controller = explode(":", $controller_exp);
 
 
-
 // -- Définition du fichier controleur ($controller_file = "homepage")
 $controller_file = $controller[0];
 $controller_path = "../src/controllers/".$controller_file.".php";
 
 // -- Définition de la fonction à exécuter
-//
+// $controller_methode = join("_", $controller);
+$controller_methode = isset($controller[1]) ? $controller[1] : null;
 
+if ($controller_methode !== null && !empty($controller_methode)) 
+{
+    $controller_methode = $controller_file."_".$controller_methode;
+}
+else {
+    $controller_methode = $controller_file."_index";
+}
 
 /**
  * Intégration du fichier controleur
@@ -59,4 +66,16 @@ include_once $controller_path;
 
 
 
+/**
+ * Exécution de la fonction du controleur
+ */
 
+// test l'existance de la fonction du controleur
+if (!function_exists($controller_methode)) 
+{
+    // Si la fonction n'existe pas le programme est arreté
+    throw new Exception("La methode \"".$controller_methode."\" de la route \"".$route[0]."\" est manquante.");
+}
+
+// Exécution de la fonction liée à la route
+$controller_methode();

@@ -1,1 +1,7 @@
-JE SUIS LA HOMEPAGE
+<?php
+
+function homepage_index() {
+
+    echo "Bonjour la HOMEPAGE";
+
+}
