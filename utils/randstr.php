@@ -9,16 +9,12 @@ if (!function_exists('randstr')) {
 
         if ($upper) {
             $characters.= $characters_upper;
-            // 
         }
 
         if ($number) {
             $characters .= $characters_number;
-            // 
         }
 
-        // 
-        
         $charactersLength = strlen($characters);
         $randomString = '';
         for ($i = 0; $i < $length; $i++) {

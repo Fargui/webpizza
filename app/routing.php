@@ -15,8 +15,6 @@ if (!isset($routes)) {
     $routes = [];
 }
 
-print_r($_SERVER['REQUEST_URI']); 
-
 // Récupération de l'uri courant
 if (!empty($_SERVER['REQUEST_URI'])) 
 {
