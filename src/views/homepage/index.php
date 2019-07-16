@@ -41,7 +41,7 @@
             <div class="col-12 col-md-6">
 
                 <div id="wpo1" class="offer-tile offer-tile-large" data-illustration="tile-1.jpg" >
-                    <a href="/pizzas"></a>
+                    <a href="<?= url('pizzas') ?>"></a>
                 </div>
 
             </div>

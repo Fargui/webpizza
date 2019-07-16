@@ -6,6 +6,10 @@
 
             <h2><?= $pageTitle ?></h2>
 
+            <div class="alert alert-success">
+                Nos pates sont faites maison !!
+            </div>
+
             <div class="row">
             <?php foreach($productsModel as $product): ?>
                 <div class="col-3">

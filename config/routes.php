@@ -21,7 +21,7 @@ $routes = [
     ],
 
     // Liste des produits
-    ["pizzas", "/pizzas", "products:pizzas", ["HEAD","GET"]],
+    ["pizzas", "/nos-pizzas", "products:pizzas", ["HEAD","GET"]],
     ["pastas", "/pates", "products:pastas", ["HEAD","GET"]],
 
     ["salads", "/salades", "products:salads", ["HEAD","GET"]],
@@ -36,7 +36,7 @@ $routes = [
     // "/admin/product/update?id=X"
 
     // Page de traitement du formulaire de contact
-    ["contact", "/contact", "contact:index", ["HEAD","POST"]],
+    ["contact", "/nous-contacter", "contact:index", ["HEAD","POST"]],
 
     // Pages de sécurité
     ["login", "/connexion", "security:login", ["HEAD","GET","POST"]],

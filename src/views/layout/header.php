@@ -36,20 +36,22 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto ml-auto">
                         <li class="nav-item">
-                            <a class="nav-link <?= ($GLOBALS['route_active'] == "pizzas" ? "active" : null) ?>" href="/pizzas">Pizzas</a>
-                            <!-- <a class="nav-link <?= ($GLOBALS['route_active'] == "pizzas" ? "active" : null) ?>" href="<?= url('pizzas') ?>">Pizzas</a> -->
+                            <a class="nav-link <?= ($GLOBALS['route_active'] == "pizzas" ? "active" : null) ?>" href="<?= url('pizzas') ?>">Pizzas</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link <?= ($GLOBALS['route_active'] == "salads" ? "active" : null) ?>" href="/salades">Salades</a>
+                            <a class="nav-link <?= ($GLOBALS['route_active'] == "salads" ? "active" : null) ?>" href="<?= url('salads') ?>">Salades</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link <?= ($GLOBALS['route_active'] == "desserts" ? "active" : null) ?>" href="/desserts">Desserts</a>
+                            <a class="nav-link <?= ($GLOBALS['route_active'] == "pastas" ? "active" : null) ?>" href="<?= url('pastas') ?>">Pates</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link <?= ($GLOBALS['route_active'] == "drinks" ? "active" : null) ?>" href="/boissons">Boissons</a>
+                            <a class="nav-link <?= ($GLOBALS['route_active'] == "desserts" ? "active" : null) ?>" href="<?= url('desserts') ?>">Desserts</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link <?= ($GLOBALS['route_active'] == "menus" ? "active" : null) ?>" href="/menus">Menus</a>
+                            <a class="nav-link <?= ($GLOBALS['route_active'] == "drinks" ? "active" : null) ?>" href="<?= url('drinks') ?>">Boissons</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link <?= ($GLOBALS['route_active'] == "menus" ? "active" : null) ?>" href="<?= url('menus') ?>">Menus</a>
                         </li>
                     </ul>
 
