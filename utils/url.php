@@ -7,7 +7,7 @@ function url($routeName, $absolute = false): string
 
     // Définition de la variable base
     $base = '';
-    $path = '/';
+    $path = '/404';
 
     if ($absolute) 
     {

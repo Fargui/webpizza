@@ -8,6 +8,9 @@
  * --
  * La session va permettre de suivre le visiteur pendant la durée de sa navigation
  */
+session_start();
+
+// var_dump($_SESSION);
 
 /**
  * 2. Intégration de la configuration
