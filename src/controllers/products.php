@@ -11,7 +11,11 @@ function products_pizzas()
     include_once "../src/models/products.php";
 
     // Récupération des données de type "pizza"
-    // dump( getPizzas() );
+    $productsModel = getPizzas();
+
+    dump( productsBuilder($productsModel) );
+
+    dump( $productsModel );
 
     // Titre de la page
     $pageTitle = "Nos Pizzas";
@@ -47,6 +51,7 @@ function products_salads()
 
     // Récupération des données de type "pizza"
     // dump( getSalads() );
+    $productsModel = getSalads();
 
     // Titre de la page
     $pageTitle = "Nos Salades";
@@ -110,4 +115,36 @@ function products_starters()
     // Récupération des données de type "starter"
     dump( getStarters() );
 
+}
+
+
+
+
+function productsBuilder( $products ): Array
+{
+    $output = [];
+
+    if (is_array($products)) 
+    {
+        foreach ($products as $product) 
+        {
+            if (!isset( $output[ $product->product_id ] )) 
+            {
+                $output[ $product->product_id ] = [];
+            }
+
+            $output[ $product->product_id ]['id'] = $product->product_id;
+            $output[ $product->product_id ]['name'] = $product->product_name;
+            $output[ $product->product_id ]['description'] = $product->product_description;
+            $output[ $product->product_id ]['price'] = $product->product_price;
+            $output[ $product->product_id ]['illustration'] = $product->product_illustration;
+            $output[ $product->product_id ]['ingredients'] = [];
+
+            // dump( $product->product_id );
+
+            // array_push($output, $product);
+        }
+    }
+
+    return $output;
 }
