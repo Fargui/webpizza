@@ -6,7 +6,7 @@
         
             <h2><?= $pageTitle ?></h2>
 
-            <form method="post" class="mb-4 mt-4">
+            <form method="post" class="mb-4 mt-4" novalidate>
             
                 <div class="form-group">
                     <label for="firstname">Prénom</label>

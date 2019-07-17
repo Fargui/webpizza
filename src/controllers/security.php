@@ -70,6 +70,8 @@ function security_login()
  */
 function security_register()
 {
+    global $regex;
+
     $pageTitle = "Inscription";
 
     // Verifie si l'utilisateur est deja identifié
@@ -82,17 +84,42 @@ function security_register()
     {
         include_once "../src/models/security.php";
 
-        $isValid = true;
+        // Définition du tableau d'erreurs
+        $errors = [];
 
         // Récupération des données 
         $firstname      = isset($_POST['firstname']) ? trim($_POST['firstname']) : null;
         $lastname       = isset($_POST['lastname']) ? trim($_POST['lastname']) : null;
         $email          = isset($_POST['email']) ? trim($_POST['email']) : null;
+        $terms          = isset($_POST['terms_of_sales']) ? true : false;
         $password_text  = isset($_POST['password']) ? $_POST['password'] : null;
         $password_hash  = password_hash($password_text, PASSWORD_DEFAULT);        
 
-        // Controle des données
-        // ...
+        // Controle du prénom
+        if (!preg_match($regex["names"], $firstname)) 
+        {
+            $errors['firstname'] = "Votre prénom n'est pas valide.";
+        }
+
+        // Controle du nom
+        if (!preg_match($regex["names"], $lastname)) 
+        {
+            $errors['lastname'] = "Votre Nom n'est pas valide.";
+        }
+
+        // Controle de l'adresse email
+        // if (!preg_match($regex["email"], $email)) 
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL))
+        {
+            $errors['email'] = "L'adresse email n'est pas valide.";
+        }
+
+        // Controle des CGV
+        if (!$terms) 
+        {
+            $errors['terms_of_sales'] = "Vous devez accepter les Conditions de ventes.";
+        }
+
 
         // Verification de l'unicité de l'utilisateur
         $user = getUserByEmail($email);
@@ -100,11 +127,11 @@ function security_register()
         // Si $user contient au moins un résultat, on stop le processus d'inscription
         if (!empty($user)) 
         {
-            $isValid = false;
+            $errors['user'] = "Un utilisateur est déjà enregistré avec cette adresse email.";
         }
 
         // Enregistrement des données dans la BDD
-        if ($isValid) 
+        if (empty($errors)) 
         {
             $user = addUser([
                 "firstname" => $firstname,

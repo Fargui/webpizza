@@ -68,3 +68,11 @@ require_once "routes.php";
 /**
  * 5. Definition des exepressions régulières
  */
+$regex = [
+
+    // La chaine doit commencer et finir par un carractère alpha et peut (ou pas) contenir un tiret (-)
+    "names" => '/^([a-z]+)(?:\s|-)?([a-z]+)$/i',
+
+    "email" => '/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/',
+
+];
