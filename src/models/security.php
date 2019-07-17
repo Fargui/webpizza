@@ -56,7 +56,7 @@ function addPwdToken($token, $user_id)
     global $db;
 
     // oDéfinition de la requete
-    $sql = "UPDATE `user` SET `pwd_token`=:token WHER `id`=:id";
+    $sql = "UPDATE `user` SET `pwd_token`=:token WHERE `id`=:id";
 
     // Préparation de la requete
     $query = $db['main']->prepare($sql);
@@ -68,7 +68,20 @@ function addPwdToken($token, $user_id)
 }
 
 
-function getUserByPwdToken()
+function getUserByPwdToken($token)
 {
-    
+    global $db;
+
+    // Definition de la requête
+    $sql = "SELECT `id`, `fullname`, `email` FROM `user` WHERE `pwd_token`=:token";
+
+    // Préparation de la requete
+    $query = $db['main']->prepare($sql);
+    $query->bindValue(':token', $token, PDO::PARAM_STR);
+
+    // Execution de la requete
+    $query->execute();
+
+    // Récupération du résultats
+    return $query->fetch(PDO::FETCH_ASSOC);
 }

@@ -182,7 +182,7 @@ function security_forgotten_password()
     {
         // Inclusion de la dépendance du model sécurity
         include_once "../src/models/security.php";
-        
+
         // définition des erreurs
         $errors = [];
 
@@ -203,14 +203,61 @@ function security_forgotten_password()
             $pwd_token = md5(uniqid().$email);
 
             // Injection du token dans la BDD
+            $query = addPwdToken($pwd_token, $user['id']);
 
-            // Création du message (email)
+            if ($query) 
+            {
+                // Création du message (email)
+                $mail_message = "Modifier votre MDP en cliquant sur le lien suivant : <br>\n";
+                $mail_message.= url("renew_password", true)."?token=".$pwd_token;
 
-            // Envois du mail
+                dump($mail_message);
+                exit;
+
+                // Envois du mail
+    
+                // Message de confirmation
+                // message OK
+            }
+            else
+            {
+                // message Erreur
+            }
         }
     }
     
     include_once "../src/views/security/forgotten_password.php";
+}
+
+function security_renew_password() 
+{
+    // Inclusion de la dépendance du model sécurity
+    include_once "../src/models/security.php";
+
+    $errors = [];
+
+    // Recup du token
+    $token = isset($_GET['token']) ? $_GET['token'] : null;
+
+    // Controle du token
+    if (null == $token) 
+    {
+        $errors['token'] = "Bad token";
+    }
+
+    if (empty($errors) && $user = getUserByPwdToken($token)) 
+    {
+        include_once "../src/views/security/renew_password.php";
+    }
+    else
+    {
+        include_once "../src/views/security/renew_password_error.php";
+    }
+
+    if (!empty($errors)) 
+    {
+        include_once "../src/views/security/renew_password_error.php";
+    }
 }
 
 

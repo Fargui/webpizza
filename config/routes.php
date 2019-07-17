@@ -42,6 +42,7 @@ $routes = [
     ["login", "/connexion", "security:login", ["HEAD","GET","POST"]],
     ["register", "/inscription", "security:register", ["HEAD","GET","POST"]],
     ["forgotten_password", "/mot-de-passe-oublie", "security:forgotten_password", ["HEAD","GET","POST"]],
+    ["renew_password", "/modifier-mon-mot-de-passe", "security:renew_password", ["HEAD","GET","POST"]],
     ["logout", "/deconnexion", "security:logout", ["HEAD","GET"]],
 
     // Page de commande
