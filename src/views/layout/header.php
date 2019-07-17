@@ -65,7 +65,7 @@
                             <div class="dropdown-menu" aria-labelledby="userDropdown">
                                 <a class="dropdown-item" href="<?= url("account") ?>">Mon compte</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="/deconnexion">Déconnexion</a>
+                                <a class="dropdown-item" href="<?= url("logout") ?>">Déconnexion</a>
                             </div>
                         </li>
                         <?php else: ?>

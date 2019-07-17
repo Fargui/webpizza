@@ -18,17 +18,21 @@ function security_login()
 
     if ($_SERVER['REQUEST_METHOD'] === "POST")
     {
+        // Inclusion de la dépendance du model sécurity
+        include_once "../src/models/security.php";
+
+        // Définition du tableau d'erreurs
         $isValid = true;
     
         // Récup des données
-        $email          = isset($_POST['email']) ? trim($_POST['email']) : null;
+        $email          = isset($_POST['login']) ? trim($_POST['login']) : null;
         $password_text  = isset($_POST['password']) ? $_POST['password'] : null;
-    
+
         // Est ce que un utilisateur correspond à l'adresse $email
-        $user = getUserByEmail($email);
+        $user = getUserByEmail($email, false);
 
         // Si $user est un tableau vide, => L'UTILISATEUR N'EST PAS ENREGISTRE DANS LA BDD
-        if (empty($user)) {
+        if (!$user) {
             $isValid = false;
         }
     
@@ -36,20 +40,23 @@ function security_login()
         // On compare le mot de passe saisi et celui de la BDD
         if ($isValid) 
         {
-            if (password_verify( $password_text, $user[0]['password'] )) 
+            if (password_verify( $password_text, $user['password'] )) 
             {
                 // Recupération du panier utilisateur a partir du numero de session
                 // Ce code permet d'associer un panier à un client qui s'identifie après 
                 // que celui-ci ait créer le panier en étant anonyme
-                $order = getOrderByUser( session_id() );
+                // $order = getOrderByUser( session_id() );
 
                 // Suppression du MDP du resultat de la requete
+                unset($user['password']);
 
                 // Ajouter les informations utilisateur dans la $_SESSION
+                $_SESSION['user'] = $user;
 
                 // Associe l'ID utilisateur à sa commande en cours
 
                 // Redirige l'utilisateur
+                redirect();
             }
             else {
                 $isValid = false;
@@ -82,6 +89,7 @@ function security_register()
 
     if ($_SERVER['REQUEST_METHOD'] === "POST")
     {
+        // Inclusion de la dépendance du model sécurity
         include_once "../src/models/security.php";
 
         // Définition du tableau d'erreurs
@@ -162,6 +170,8 @@ function security_register()
  */
 function security_forgotten_password()
 {
+    $pageTitle = "Récupération du mot de passe";
+
     // Verifie si l'utilisateur est deja identifié
     if (isset($_SESSION['user']['id']) && !empty($_SESSION['user']['id'])) 
     {
@@ -172,6 +182,8 @@ function security_forgotten_password()
     {
 
     }
+    
+    include_once "../src/views/security/forgotten_password.php";
 }
 // Si utilisateur deja identifier => redirection vers /mon-compte
 // Affichage du formulaire (email)

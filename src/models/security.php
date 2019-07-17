@@ -1,16 +1,45 @@
 <?php
 
-function getUserByEmail($email) {
-    
-}
-
-
-function addUser(array $user) 
+function getUserByEmail($email, $secured=true) 
 {
     global $db;
 
-    // Préparation de la requête
-    $sql = "INSERT INTO user (`firstname`,`lastname`,`email`,`password`) VALUES (:firstname,:lastname,:email,:password)";
+    // Definition de la requête
+    $sql = "SELECT `id`, `fullname`, `email`, `password` FROM `user` WHERE `email`=:email";
+
+    // Préparation de la requete
+    $query = $db['main']->prepare($sql);
+    $query->bindValue(':email', $email, PDO::PARAM_STR);
+
+    // Execution de la requete
+    $query->execute();
+
+    // Récupération du résultats
+    $response = $query->fetch(PDO::FETCH_ASSOC);
+
+    // Si la requête retourne un réponse...
+    if ($response) 
+    {
+        // Si on sécurise la réponse...
+        if ($secured) 
+        {
+            // On supprime le mot de passe de la réponse
+            unset($response['password']);
+        }
+
+        return $response;
+    }
+    
+    return false;
+}
+
+
+function addUser(array $user)
+{
+    global $db;
+
+    // Definition de la requête
+    $sql = "INSERT INTO `user` (`firstname`,`lastname`,`email`,`password`) VALUES (:firstname,:lastname,:email,:password)";
 
     // Préparation de la requete
     $query = $db['main']->prepare($sql);
