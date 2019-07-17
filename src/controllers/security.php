@@ -8,6 +8,8 @@
  */
 function security_login()
 {
+    $pageTitle = "Connexion";
+
     // Verifie si l'utilisateur est deja identifié
     if (isset($_SESSION['user']['id']) && !empty($_SESSION['user']['id'])) 
     {
@@ -68,6 +70,8 @@ function security_login()
  */
 function security_register()
 {
+    $pageTitle = "Inscription";
+
     // Verifie si l'utilisateur est deja identifié
     if (isset($_SESSION['user']['id']) && !empty($_SESSION['user']['id'])) 
     {

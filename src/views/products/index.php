@@ -15,6 +15,8 @@
                         <div class="card-body">
                             <h5 class="card-title"><?= $product['name'] ?></h5>
                             <p class="lead"><?= $product['description'] ?></p>
+                            <p class="lead"><?= $product['price'] ?> &euro;</p>
+                            <a href="<?= url("add_to_order") ?>?id=<?= $product['id'] ?>" class="btn btn-block btn-success">Ajouter au panier</a>
                         </div>
                     </div>
 

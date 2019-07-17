@@ -10,8 +10,6 @@
  */
 session_start();
 
-// var_dump($_SESSION);
-
 /**
  * 2. Intégration de la configuration
  */

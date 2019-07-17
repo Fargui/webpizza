@@ -47,7 +47,7 @@ $routes = [
     // Page de commande
     ["order", "/panier", "order:index", ["HEAD","GET"]],
     // Ajout de produit au panier
-    ["add_to_order", "/add-to-order", "order:add", ["HEAD","GET"]],
+    ["add_to_order", "/ajouter-au-panier", "order:add", ["HEAD","GET"]],
 
 
     // Profil utilisateur

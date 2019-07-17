@@ -32,7 +32,7 @@ function products_pastas()
     $productsModel = productsBuilder(getPastas());
     $pageTitle = "Nos Pates";
 
-    include_once "../src/views/products/pastas.php";
+    include_once "../src/views/products/index.php";
 }
 
 /**
