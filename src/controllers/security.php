@@ -234,30 +234,72 @@ function security_renew_password()
     // Inclusion de la dépendance du model sécurity
     include_once "../src/models/security.php";
 
+    $pageTitle = "Modification du mot de passe";
+
+    // Définition du tableau d'erreurs
     $errors = [];
 
     // Recup du token
     $token = isset($_GET['token']) ? $_GET['token'] : null;
 
-    // Controle du token
-    if (null == $token) 
+    // Vérification du token
+    if ($token == null) 
     {
         $errors['token'] = "Bad token";
     }
 
-    if (empty($errors) && $user = getUserByPwdToken($token)) 
+    // Si le token est OK (pas d'erreur)
+    if (empty($errors))
     {
-        include_once "../src/views/security/renew_password.php";
-    }
-    else
-    {
-        include_once "../src/views/security/renew_password_error.php";
+        // On tente de récupérer les données de l'utilisateur à l'origine de la demande de renouvellement du mot de passe
+        $user = getUserByPwdToken($token);
+
+        // Si la requête retourne "false", l'utilisateur n'a pas ete trouvé dans la BDD (mauvais token ou token effacé de la BDD)
+        if (!$user) 
+        {
+            $errors['token'] = "User by token not found";
+        }
+        // Si non ($user OK), on test le délais de validité du token
+        elseif (($user['pwd_token_expire'] - time()) < 0)
+        {
+            $errors['token'] = "Token expired";
+        }
     }
 
-    if (!empty($errors)) 
+    // Si le token est OK (pas d'erreur)
+    if (empty($errors) && $_SERVER['REQUEST_METHOD'] === "POST")
+    {
+        // Récupération des données 
+        $password_text      = isset($_POST['password']) ? $_POST['password'] : null;
+        $password_confirm   = isset($_POST['password_confirmation']) ? $_POST['password_confirmation'] : null;
+        $password_hash      = password_hash($password_text, PASSWORD_DEFAULT);        
+
+        // Controle du mot de passe
+        if ($password_text != $password_confirm) 
+        {
+            $errors['password'] = "Les mots de passe ne sont pas identique";
+        }
+
+        if (empty($errors))
+        {
+            // Modification de la BDD
+            $query = renewPassword([
+                "id" => $user['id'],
+                "password" => $password_hash
+            ]);
+
+            // redirection de l'utilisateur
+            redirect(url("login"));
+        }
+    }
+
+    if (!empty($errors))
     {
         include_once "../src/views/security/renew_password_error.php";
+        return;
     }
+
+    include_once "../src/views/security/renew_password.php";
 }
 
 

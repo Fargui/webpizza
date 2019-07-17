@@ -54,26 +54,27 @@ function addUser(array $user)
 function addPwdToken($token, $user_id)
 {
     global $db;
+    $token_expiration = time() + 3600;
 
     // oDéfinition de la requete
-    $sql = "UPDATE `user` SET `pwd_token`=:token WHERE `id`=:id";
+    $sql = "UPDATE `user` SET `pwd_token`=:token, `pwd_token_expire`=:token_expiration WHERE `id`=:id";
 
     // Préparation de la requete
     $query = $db['main']->prepare($sql);
     $query->bindValue(':token', $token, PDO::PARAM_STR);
+    $query->bindValue(':token_expiration', $token_expiration, PDO::PARAM_INT);
     $query->bindValue(':id', $user_id, PDO::PARAM_INT);
 
     // Execution de la requete
     return $query->execute();
 }
 
-
 function getUserByPwdToken($token)
 {
     global $db;
 
     // Definition de la requête
-    $sql = "SELECT `id`, `fullname`, `email` FROM `user` WHERE `pwd_token`=:token";
+    $sql = "SELECT `id`, `fullname`, `email`, `pwd_token_expire` FROM `user` WHERE `pwd_token`=:token";
 
     // Préparation de la requete
     $query = $db['main']->prepare($sql);
@@ -84,4 +85,20 @@ function getUserByPwdToken($token)
 
     // Récupération du résultats
     return $query->fetch(PDO::FETCH_ASSOC);
+}
+
+function renewPassword($user) 
+{
+    global $db;
+    
+    // Definition de la requête
+    $sql = "UPDATE `user` SET `password`=:password, `pwd_token`=NULL, `pwd_token_expire`=NULL WHERE `id`=:id";
+
+    // Préparation de la requete
+    $query = $db['main']->prepare($sql);
+    $query->bindValue(':password', $user['password'], PDO::PARAM_STR);
+    $query->bindValue(':id', $user['id'], PDO::PARAM_INT);
+
+    // Execution de la requete
+    return $query->execute();
 }
