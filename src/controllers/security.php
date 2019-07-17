@@ -25,7 +25,7 @@ function security_login()
         $isValid = true;
     
         // Récup des données
-        $email          = isset($_POST['login']) ? trim($_POST['login']) : null;
+        $email          = isset($_POST['login']) ? trim(htmlentities($_POST['login'])) : null;
         $password_text  = isset($_POST['password']) ? $_POST['password'] : null;
 
         // Est ce que un utilisateur correspond à l'adresse $email
@@ -96,9 +96,9 @@ function security_register()
         $errors = [];
 
         // Récupération des données 
-        $firstname      = isset($_POST['firstname']) ? trim($_POST['firstname']) : null;
-        $lastname       = isset($_POST['lastname']) ? trim($_POST['lastname']) : null;
-        $email          = isset($_POST['email']) ? trim($_POST['email']) : null;
+        $firstname      = isset($_POST['firstname']) ? trim(htmlentities($_POST['firstname'])) : null;
+        $lastname       = isset($_POST['lastname']) ? trim(htmlentities($_POST['lastname'])) : null;
+        $email          = isset($_POST['email']) ? trim(htmlentities($_POST['email'])) : null;
         $terms          = isset($_POST['terms_of_sales']) ? true : false;
         $password_text  = isset($_POST['password']) ? $_POST['password'] : null;
         $password_hash  = password_hash($password_text, PASSWORD_DEFAULT);        
@@ -180,19 +180,38 @@ function security_forgotten_password()
 
     if ($_SERVER['REQUEST_METHOD'] === "POST")
     {
+        // Inclusion de la dépendance du model sécurity
+        include_once "../src/models/security.php";
+        
+        // définition des erreurs
+        $errors = [];
 
+        // Récupération des données
+        $email = isset($_POST['email']) ? trim(htmlentities($_POST['email'])) : null;
+
+        // Vérification de l'existance du l'utilisateur dans la BDD
+        $user = getUserByEmail($email);
+
+        if (!$user) 
+        {
+            $errors['user'] = "L'utilisateur $email, n'existe pas.";
+        }
+
+        if (empty($errors))
+        {
+            // Génération du token
+            $pwd_token = md5(uniqid().$email);
+
+            // Injection du token dans la BDD
+
+            // Création du message (email)
+
+            // Envois du mail
+        }
     }
     
     include_once "../src/views/security/forgotten_password.php";
 }
-// Si utilisateur deja identifier => redirection vers /mon-compte
-// Affichage du formulaire (email)
-// Traitement des données du formulaire
-    // Récup des données
-    // Controle des données
-    // Verification de l'utilisateur
-    // Si OK => Process (token + email)
-    // Si KO => flashbag message d'erreur
 
 
 /**

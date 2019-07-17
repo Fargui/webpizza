@@ -33,7 +33,6 @@ function getUserByEmail($email, $secured=true)
     return false;
 }
 
-
 function addUser(array $user)
 {
     global $db;
@@ -50,4 +49,26 @@ function addUser(array $user)
 
     // Execution de la requete
     return $query->execute();
+}
+
+function addPwdToken($token, $user_id)
+{
+    global $db;
+
+    // oDéfinition de la requete
+    $sql = "UPDATE `user` SET `pwd_token`=:token WHER `id`=:id";
+
+    // Préparation de la requete
+    $query = $db['main']->prepare($sql);
+    $query->bindValue(':token', $token, PDO::PARAM_STR);
+    $query->bindValue(':id', $user_id, PDO::PARAM_INT);
+
+    // Execution de la requete
+    return $query->execute();
+}
+
+
+function getUserByPwdToken()
+{
+    
 }
