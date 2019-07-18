@@ -49,6 +49,7 @@ $routes = [
     ["order", "/panier", "order:index", ["HEAD","GET"]],
     // Ajout de produit au panier
     ["add_to_order", "/ajouter-au-panier", "order:add", ["HEAD","GET"]],
+    ["remove_from_order", "/supprimer-du-panier", "order:remove", ["HEAD","GET"]],
 
 
     // Profil utilisateur

@@ -71,7 +71,6 @@ function security_login()
     include_once "../src/views/security/login.php";
 }
 
-
 /**
  * register
  */
@@ -164,7 +163,6 @@ function security_register()
     include_once "../src/views/security/register.php";
 }
 
-
 /**
  * forgotten_password
  */
@@ -215,6 +213,7 @@ function security_forgotten_password()
                 exit;
 
                 // Envois du mail
+                // mail($user['email'], "Modification de votre mot de passe WebPizza" , $mail_message);
     
                 // Message de confirmation
                 // message OK
@@ -301,7 +300,6 @@ function security_renew_password()
 
     include_once "../src/views/security/renew_password.php";
 }
-
 
 /**
  * Deconnexion utilisateur

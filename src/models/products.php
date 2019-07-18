@@ -37,3 +37,28 @@ function getDesserts(){ return getProducts('dessert'); }
 function getDrinks(){ return getProducts('drink'); }
 function getMenus(){ return getProducts('menu'); }
 function getStarters(){ return getProducts('starter'); }
+
+
+/**
+ * Récupération d'un produit par son $ID
+ *
+ * @param integer $id
+ * @return void
+ */
+function getProduct(int $id)
+{
+    global $db;
+
+    // definition de la requête
+    $sql = "SELECT `id`,`name`,`description`,`price`,`type`,`illustration` FROM `product` WHERE `id`=:id";
+
+    // Préparation de la requete
+    $query = $db['main']->prepare($sql);
+    $query->bindValue(':id', $id, PDO::PARAM_INT);
+
+    // Execution de la requete
+    $query->execute();
+
+    // Récupération du résultats
+    return $query->fetch(PDO::FETCH_ASSOC);
+}
