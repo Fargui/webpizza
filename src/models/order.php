@@ -72,3 +72,33 @@ function getOrderProducts($id_order)
 
     return $query->fetchAll(PDO::FETCH_OBJ);
 }
+
+
+/**
+ * Ajoute un produit à une commande
+ *
+ * @param array $product données du produit
+ * @param integer $order id de la commande
+ * @return void
+ */
+function addProductToOrder($product, $order)
+{
+    global $db;
+
+    // Définition de la requete
+    $sql = "INSERT INTO `` (``,``,``,``,``) VALUES (:xxx,:xxx,:xxx,:xxx,:xxx)";
+    
+    // Préparation de la requete
+    $query = $db['main']->prepare($sql);
+    $query->bindValue(':id_order', $order, PDO::PARAM_INT);
+    $query->bindValue(':id_product', $product['id'], PDO::PARAM_INT);
+    $query->bindValue(':quantity', 1, PDO::PARAM_INT);
+    $query->bindValue(':price', $product['price']);
+    $query->bindValue(':amount', $product['price']);
+    
+    // Execution de la requete
+    $query->execute();
+
+    // Retourne l'id de l'enregistrement
+    return $db['main']->lastInsertId();
+}

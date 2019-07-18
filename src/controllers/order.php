@@ -95,7 +95,8 @@ function order_add()
     }
 
     // Ajout du produit dans la BDD si $addProductToOrder est TRUE
-    if ($addProductToOrder) {
+    if ($addProductToOrder) 
+    {
         $isOrderProductOK = addProductToOrder($product, $order);
     }
 
