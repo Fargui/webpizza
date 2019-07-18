@@ -1324,3 +1324,6 @@
 127.0.0.1 - - [18/Jul/2019:15:29:43 +0200] "GET /ajouter-au-panier?id=2 HTTP/1.1" 200 250
 127.0.0.1 - - [18/Jul/2019:15:29:44 +0200] "GET /ajouter-au-panier?id=2 HTTP/1.1" 200 250
 127.0.0.1 - - [18/Jul/2019:15:58:22 +0200] "GET /ajouter-au-panier?id=2 HTTP/1.1" 200 249
+127.0.0.1 - - [18/Jul/2019:17:04:19 +0200] "GET /ajouter-au-panier?id=2 HTTP/1.1" 200 249
+127.0.0.1 - - [18/Jul/2019:17:06:04 +0200] "GET /ajouter-au-panier?id=2 HTTP/1.1" 200 602
+127.0.0.1 - - [18/Jul/2019:17:06:44 +0200] "GET /ajouter-au-panier?id=2 HTTP/1.1" 200 444

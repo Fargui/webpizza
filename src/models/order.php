@@ -86,7 +86,7 @@ function addProductToOrder($product, $order)
     global $db;
 
     // Définition de la requete
-    $sql = "INSERT INTO `` (``,``,``,``,``) VALUES (:xxx,:xxx,:xxx,:xxx,:xxx)";
+    $sql = "INSERT INTO `order_product` (`id_order`,`id_product`,`quantity`,`price`,`amount`) VALUES (:id_order,:id_product,:quantity,:price,:amount)";
     
     // Préparation de la requete
     $query = $db['main']->prepare($sql);
@@ -101,4 +101,18 @@ function addProductToOrder($product, $order)
 
     // Retourne l'id de l'enregistrement
     return $db['main']->lastInsertId();
+}
+
+
+function updateProductInOrder($product, $order_product_id)
+{
+    global $db;
+
+    // Definition de la requete
+
+    // Préparation de la requete
+    $query = $db['main']->prepare($sql);
+
+    // Execution de la requete
+    return $query->execute();
 }

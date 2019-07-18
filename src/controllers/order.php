@@ -83,10 +83,10 @@ function order_add()
     foreach ($order_products as $order_product )
     {
         // Si le produit est deja dans la commande
-        if ($order_product['id_product'] == $product['id']) 
+        if ($order_product->id_product == $product['id']) 
         {
             // Incrémentation de la quantité
-            // $isOrderProductOK = updateProductInOrder($product, $order_product['id']);
+            $isOrderProductOK = updateProductInOrder($product, $order_product->id);
 
             // Et on passe la valeur de $addProductToOrder à FALSE, ce qui evitera au script 
             // d'ajouter une nouvelle ligne dans la BDD
