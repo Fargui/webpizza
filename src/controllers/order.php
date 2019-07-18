@@ -78,6 +78,30 @@ function order_add()
     // savoir si on ajoute le produit dans la BDD ou non
     $addProductToOrder = true;
 
+    // On boucle sur la liste des produits de la commande
+    // On ne rentre pas dans la boucle SI $order_products est un tableau vide
+    foreach ($order_products as $order_product )
+    {
+        // Si le produit est deja dans la commande
+        if ($order_product['id_product'] == $product['id']) 
+        {
+            // Incrémentation de la quantité
+            // $isOrderProductOK = updateProductInOrder($product, $order_product['id']);
+
+            // Et on passe la valeur de $addProductToOrder à FALSE, ce qui evitera au script 
+            // d'ajouter une nouvelle ligne dans la BDD
+            $addProductToOrder = false;
+        } 
+    }
+
+    // Ajout du produit dans la BDD si $addProductToOrder est TRUE
+    if ($addProductToOrder) {
+        $isOrderProductOK = addProductToOrder($product, $order);
+    }
+
+
+
+
 
 
     dump( $product );
