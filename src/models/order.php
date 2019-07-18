@@ -109,9 +109,11 @@ function updateProductInOrder($product, $order_product_id)
     global $db;
 
     // Definition de la requete
+    $sql = "UPDATE `order_product` SET `quantity`=`quantity`+1, `amount`=`amount`+".$product['price']." WHERE `id`=:id";
 
     // Préparation de la requete
     $query = $db['main']->prepare($sql);
+    $query->bindValue(':id', $order_product_id, PDO::PARAM_INT);
 
     // Execution de la requete
     return $query->execute();
